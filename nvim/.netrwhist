@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/andresfernandez/Documents/repos/pact-testing-2/sqs-consumer/src'
+let g:netrw_dirhist_6='/Users/andresfernandez/Documents/Wholemeaning/email-app/src/screens/DailyAgent/selectors'
+let g:netrw_dirhist_5='/Users/andresfernandez/.config/nvim'
+let g:netrw_dirhist_4='/Users/andresfernandez/Documents/Wholemeaning/email-app/src'
+let g:netrw_dirhist_3='/Users/andresfernandez/Documents/Wholemeaning/email-app'
+let g:netrw_dirhist_2='/Users/andresfernandez/Documents/Wholemeaning/email-app/src'
+let g:netrw_dirhist_1='/Users/andresfernandez/Documents/Wholemeaning/email-app'
+let g:netrw_dirhist_0='/Users/andresfernandez/Documents/Wholemeaning/email-app/src'
+let g:netrw_dirhist_9='/Users/andresfernandez/Documents/Wholemeaning/email-app'
+let g:netrw_dirhist_8='/Users/andresfernandez/Documents/Mach/repos/mach-tef-out-service'
