@@ -1,6 +1,6 @@
 local opts = { noremap = true, silent = true }
 
-local term_opts = { silent = true }
+-- local term_opts = { silent = true }
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -57,7 +57,7 @@ keymap("v", ">", ">gv", opts)
 -- Move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("v", "p", '"_dP', opts)
+keymap("v", "p", '"_dP', opts) -- after replacing, this avoids yanking the replaced text in register
 
 -- Visual Block --
 -- Move text up and down
@@ -67,7 +67,7 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Terminal --
--- Better terminal navigation
+-- Better terminal navigation (not needed. Using integration with Tmux)
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
@@ -76,7 +76,8 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- Custom
 keymap("n", "<Esc><Esc>", "<cmd>nohlsearch<cr>", opts)
 keymap("n", "<TAB>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-keymap("n", "Q", "<cmd>bdelete!<CR>", opts)
+--keymap("n", "Q", "<cmd>bdelete!<CR>", opts)
+keymap("n", "Q", "<Nop>", opts)
 keymap("n", "<F1>", ":e ~/Notes/<cr>", opts)
 keymap("n", "<F3>", ":e .<cr>", opts)
 keymap("n", "<F4>", "<cmd>Telescope resume<cr>", opts)
@@ -89,14 +90,23 @@ keymap(
 )
 keymap("n", "<F7>", "<cmd>TSHighlightCapturesUnderCursor<cr>", opts)
 keymap("n", "<F8>", "<cmd>TSPlaygroundToggle<cr>", opts)
-keymap("n", "<F11>", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-keymap("n", "<F12>", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 keymap("v", "//", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], opts)
 keymap(
   "n",
-  "<C-p>",
+  "<leader>pf",
   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
   opts
+)
+keymap(
+  "n",
+  "<C-p>",
+  "<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+  opts
+)
+vim.keymap.set(
+  "n",
+  "<leader>ps",
+  function() require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ")}) end
 )
 keymap("n", "<C-t>", "<cmd>lua vim.lsp.buf.document_symbol()<cr>", opts)
 keymap("n", "<C-s>", "<cmd>vsplit<cr>", opts)
@@ -110,8 +120,8 @@ keymap("n", "<c-n>", ":e ~/Notes/<cr>", opts)
 -- keymap("n", "gx", [[:execute '!brave ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
 keymap("n", "gx", [[:silent execute '!$BROWSER ' . shellescape(expand('<cfile>'), 1)<CR>]], opts)
 -- Change '<CR>' to whatever shortcut you like :)
-keymap('n', '<CR>', '<cmd>NeoZoomToggle<CR>', { noremap=true, silent=true, nowait=true })
+-- keymap('n', '<CR>', '<cmd>NeoZoomToggle<CR>', { noremap=true, silent=true, nowait=true })
 keymap('n', '<leader>e', '<cmd>:NvimTreeToggle<CR>', opts)
-keymap('n', '<leader>q', ':bp<bar>sp<bar>bn<bar>bd<CR>', opts)
+keymap('n', '<C-q>', ':bp<bar>sp<bar>bn<bar>bd<CR>', opts) -- close buffer without closing its split
 keymap('n', '<leader>w', ':w<CR>', opts)
 keymap('n', '<leader><leader>', '<c-^>', opts)
